@@ -4,12 +4,10 @@ import (
 	"math"
 	"net/http"
 	"sort"
-	"time"
 
 	"github.com/alessandromr/pharmacy/datalayer/memory"
 	"github.com/alessandromr/pharmacy/internal/coordinates"
 	"github.com/alessandromr/pharmacy/model"
-	"github.com/alessandromr/pharmacy/script"
 )
 
 type Pharmacy struct{}
@@ -37,9 +35,6 @@ type PharmacyDistance struct {
 func (s *Pharmacy) SearchNearestPharmacy(r *http.Request, args *SearchNearestPharmacyParamas, reply *SearchNearestPharmacyResponse) error {
 	const earthRadiusKm = 6371
 	pharmaciesDL := memory.PharmaciesMemory{}
-
-	go script.SyncData(&pharmaciesDL)
-	time.Sleep(time.Second * 2)
 
 	//Get pharmacies list from datalayer
 	pharmacies, _ := pharmaciesDL.GetPharmacies()
