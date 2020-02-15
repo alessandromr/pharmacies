@@ -63,8 +63,8 @@ func GetPharmacies() ([]model.Pharmacy, error){
 		pharmacy := model.Pharmacy{
 			Name: v.Properties.Descrizione,
 			Position: model.Location{
-				Latitude: v.Geometry.Coordinates[0],
-				Longitude:v.Geometry.Coordinates[1],
+				Latitude: v.Geometry.Coordinates[1],
+				Longitude:v.Geometry.Coordinates[0],
 			},
 		}
 		pharmacies = append(pharmacies, pharmacy)
