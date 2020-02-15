@@ -1,7 +1,6 @@
 package jsonrpc
 
 import (
-	"log"
 	"math"
 	"net/http"
 	"sort"
@@ -15,19 +14,18 @@ import (
 
 type Pharmacy struct{}
 
-
 type SearchNearestPharmacyParamas struct {
-	CurrentLocation Location  `json:"currentLocation"`
-	Range int  `json:"range"`
-	Limit int  `json:"limit"`
+	CurrentLocation Location `json:"currentLocation"`
+	Range           int      `json:"range"`
+	Limit           int      `json:"limit"`
 }
 
 type SearchNearestPharmacyResponse struct {
 	Pharmacies []PharmacyDistance `json:"pharmacies"`
 }
 
-type Location struct{
-	Latitude float64 `json:"latitude"`
+type Location struct {
+	Latitude  float64 `json:"latitude"`
 	Longitude float64 `json:"longitude"`
 }
 
@@ -36,25 +34,25 @@ type PharmacyDistance struct {
 	Distance int
 }
 
-func (s *Pharmacy) SearchNearestPharmacy(r *http.Request, args *SearchNearestPharmacyParamas, reply *SearchNearestPharmacyResponse) error{
-	const earthRadiusKm = 6371;
+func (s *Pharmacy) SearchNearestPharmacy(r *http.Request, args *SearchNearestPharmacyParamas, reply *SearchNearestPharmacyResponse) error {
+	const earthRadiusKm = 6371
 	pharmaciesDL := memory.PharmaciesMemory{}
 
 	go script.SyncData(&pharmaciesDL)
 	time.Sleep(time.Second * 2)
-	
+
 	//Get pharmacies list from datalayer
 	pharmacies, _ := pharmaciesDL.GetPharmacies()
 	pharmacyDistance := make([]PharmacyDistance, len(pharmacies))
-	
+
 	//Calculate distancies from pharmacies
 	for k, v := range pharmacies {
 		distance := coordinates.CalculateDistance(
-			coordinates.Coordinate{
+			coordinates.Coordinates{
 				Lat: args.CurrentLocation.Latitude,
 				Lon: args.CurrentLocation.Longitude,
 			},
-			coordinates.Coordinate{
+			coordinates.Coordinates{
 				Lat: v.Position.Latitude,
 				Lon: v.Position.Longitude,
 			},
@@ -72,14 +70,14 @@ func (s *Pharmacy) SearchNearestPharmacy(r *http.Request, args *SearchNearestPha
 	})
 
 	//Remove pharmacies out of range
-	for k,v := range pharmacyDistance{
+	for k, v := range pharmacyDistance {
 		if v.Distance > args.Range {
 			pharmacyDistance = pharmacyDistance[:k]
 			break
 		}
 	}
 
-	if args.Limit >= len(pharmacyDistance){
+	if args.Limit >= len(pharmacyDistance) {
 		reply.Pharmacies = pharmacyDistance
 		return nil
 	}
@@ -87,7 +85,6 @@ func (s *Pharmacy) SearchNearestPharmacy(r *http.Request, args *SearchNearestPha
 	return nil
 }
 
-func degreesToRadians(degrees float64) float64{
-	return degrees * math.Pi / 180;
-  }
-  
+func degreesToRadians(degrees float64) float64 {
+	return degrees * math.Pi / 180
+}

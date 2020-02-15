@@ -1,10 +1,10 @@
-package script 
+package script
 
 import (
-	"log"
-	"time"
 	"github.com/alessandromr/pharmacy/adapter/web"
 	"github.com/alessandromr/pharmacy/datalayer"
+	"log"
+	"time"
 )
 
 //SyncData update pharmacies list every 24 hours
