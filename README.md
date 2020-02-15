@@ -9,7 +9,6 @@
 
 1. `docker run`
 
-
 ## Application Structure
 
 ```
