@@ -5,7 +5,6 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gorilla/rpc"
 	"github.com/gorilla/rpc/json"
-	"net/http"
 )
 
 func NewJsonRpcServer() *mux.Router {
@@ -20,8 +19,4 @@ func NewJsonRpcServer() *mux.Router {
 	jsonRPC.RegisterService(new(jsonrpc.Pharmacy), "")
 	r.Handle("/api", jsonRPC)
 	return r
-}
-
-func test(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Test"))
 }

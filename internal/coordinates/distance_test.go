@@ -10,7 +10,7 @@ type CoordinateTestCase struct {
 	ExpectedDistance int
 }
 
-func TestCalculateDistanceSamePoint(t *testing.T) {
+func TestUnit_CalculateDistance(t *testing.T) {
 
 	testCases := []CoordinateTestCase{
 		CoordinateTestCase{
