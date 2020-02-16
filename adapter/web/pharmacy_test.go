@@ -6,8 +6,8 @@ import (
 
 func TestIntegration_GetPharmacies(t *testing.T) {
 	pharmacies, err := GetPharmacies()
-	if err != nil{
-       t.Fatal(err)
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	if len(pharmacies) < 1 {
