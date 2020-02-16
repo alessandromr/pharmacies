@@ -10,7 +10,7 @@ Data about pharmacies is refreshed every 24 hours and persisted in memory.
 
 ### Steps
 
-1. Build the container `docker build --tag jsonrpc`
+1. Build the container `docker build --tag jsonrpc .`
 2. Start the container `docker run --rm -p 8080:8080 --name jsonrpc jsonrpc:latest`
 
 
