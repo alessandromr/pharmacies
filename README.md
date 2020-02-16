@@ -17,7 +17,7 @@ Data about pharmacies is refreshed every 24 hours and persisted in memory.
 Application will be started on port `8080` inside the docker container. To change the port binding on your host simply change the first port in the docker run command. 
 For example to use port `9901` you can use this command:
 ```docker
-    docker run --rm -p 9901:8080 --name jsonrpc jsonrpc:latest
+docker run --rm -p 9901:8080 --name jsonrpc jsonrpc:latest
 ```
 
 Image Size:  
