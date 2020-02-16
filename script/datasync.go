@@ -2,6 +2,7 @@ package script
 
 import (
 	"github.com/alessandromr/pharmacy/adapter/web"
+	"github.com/alessandromr/pharmacy/config"
 	"github.com/alessandromr/pharmacy/datalayer"
 	"log"
 	"time"
@@ -10,7 +11,7 @@ import (
 //SyncData update pharmacies list every 24 hours
 func SyncData(pharmaciesDL datalayer.Pharmacy) {
 	updatePharmacies(pharmaciesDL)
-	for range time.Tick(time.Hour * 24) {
+	for range time.Tick(time.Hour * time.Duration(config.RefreshRateHours)) {
 		updatePharmacies(pharmaciesDL)
 	}
 }

@@ -2,6 +2,7 @@ package web
 
 import (
 	"encoding/json"
+	"github.com/alessandromr/pharmacy/config"
 	"github.com/alessandromr/pharmacy/model"
 	"io/ioutil"
 	"log"
@@ -35,7 +36,7 @@ func GetPharmacies() ([]model.Pharmacy, error) {
 
 	sleep := 1
 	for {
-		response, err := http.Get("https://dati.regione.campania.it/catalogo/resources/Elenco-Farmacie.geojson")
+		response, err := http.Get(config.PharmaciesDataSource)
 
 		if err != nil {
 			log.Printf("Updating Pharmacies List Failed, retrying after %d seconds\n", sleep)
