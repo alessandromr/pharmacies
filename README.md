@@ -1,4 +1,4 @@
-# Test Closest Pharmacies
+# Pharmacies
 
 ## How to start the application
 
@@ -25,22 +25,34 @@ go test --cover ./...
 
 ### Testing with docker
 
-Complete test:
+Full test (Unit + Integration):
 1. `docker build --tag jsonrpctest . -f test.dockerfile`
 2. `docker run  --rm jsonrpctest:latest`
 
 ## Application Structure
 
+The application structure is inspired by the `Standard Go Project Layout`.  
+
 ```
 ├── adapter
 │   └── web
+├── cmd
+│   └── jsonrpc
+├── config
 ├── datalayer
-│   └── memory
+│   ├── memory
+├── internal
+│   ├── coordinates
+│   └── rpcserver
 ├── model
 ├── presentation
+│   └── jsonrpc
 ```
 
-1. adapter directory contains the logic for external services comunication. An example is the logic to retrieve pharmacies list from the external source.
-2. datalayer directory contains all the logic to retrieve data from data sources. The actually data source is abstracted with an interface.
-3. model directory contains all the definitions of the entity involved
-3. presentation containes all the logic and the abstraction to expose information on differents channels
+1. **adapter** contains the logic for external services comunication. An example is the logic to retrieve pharmacies list from the external source.
+2. **cmd** contains all the entrypoint of the application divided by directory
+3. **config** contains all the configuration files template or the default configs
+4. **datalayer** contains all the logic to retrieve data from data sources. The actually data source is abstracted with an interface.
+5. **internal** contains the unexported logic
+6. **model** contains all the definitions of the entity involved
+7. **presentation** containes all the logic and the abstraction to expose information on differents channels (RPC, REST, GRPC, ...)
