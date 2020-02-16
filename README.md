@@ -20,6 +20,14 @@ For example to use port `9901` you can use this command:
     docker run --rm -p 9901:8080 --name jsonrpc jsonrpc:latest
 ```
 
+Image Size:  
+```
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+jsonrpc                 latest              <>                  25 seconds ago      13.3MB
+jsonrpctest             latest              <>                  15 hours ago        546MB
+```
+Docker container is built with multi-stage build to achieve a really small size of only 13.3MB.
+
 ## Automated Testing
 Test execution can be done on your local machine or in a Docker container (without installing anything beside of Docker).  
 
