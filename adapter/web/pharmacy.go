@@ -10,21 +10,25 @@ import (
 	"time"
 )
 
+//PharmacyResponses represents the response given from the external service
 type PharmacyResponses struct {
 	Features []Feature
 }
 
+//Feature represents a single pharmacy in the response given from the external service
 type Feature struct {
 	Type       string
 	Geometry   Geometry
 	Properties Properties
 }
 
+//Geometry represents the coordinates for a single pharmacy in the response given from the external service
 type Geometry struct {
 	Type        string
 	Coordinates []float64
 }
 
+//Properties represents the proprierties (Description) for a single pharmacy in the response given from the external service
 type Properties struct {
 	Descrizione string
 }

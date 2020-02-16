@@ -1,7 +1,6 @@
 package jsonrpc
 
 import (
-	"math"
 	"net/http"
 	"sort"
 
@@ -78,8 +77,4 @@ func (s *Pharmacy) SearchNearestPharmacy(r *http.Request, args *SearchNearestPha
 	}
 	reply.Pharmacies = pharmacyDistance[:args.Limit]
 	return nil
-}
-
-func degreesToRadians(degrees float64) float64 {
-	return degrees * math.Pi / 180
 }
