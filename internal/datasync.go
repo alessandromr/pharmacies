@@ -1,4 +1,4 @@
-package script
+package internal
 
 import (
 	"github.com/alessandromr/pharmacy/adapter/web"

@@ -1,4 +1,4 @@
-package script
+package internal
 
 import (
 	"testing"
@@ -10,20 +10,20 @@ func TestIntegration_SyncData(t *testing.T) {
 	pharmacyDL := memory.PharmaciesMemory{}
 
 	pharmacies, err := pharmacyDL.GetPharmacies()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
-	if len(pharmacies) != 0{
+	if len(pharmacies) != 0 {
 		t.Fatal("Memory is not empty")
 	}
-	
+
 	updatePharmacies(&pharmacyDL)
 
 	pharmacies, err = pharmacyDL.GetPharmacies()
-	if err != nil{
+	if err != nil {
 		t.Fatal(err)
 	}
-	if len(pharmacies) == 0{
+	if len(pharmacies) == 0 {
 		t.Fatal("Error retrieving pharmacies")
 	}
 }

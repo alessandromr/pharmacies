@@ -6,14 +6,14 @@ import (
 	"time"
 
 	"github.com/alessandromr/pharmacy/datalayer/memory"
+	"github.com/alessandromr/pharmacy/internal"
 	"github.com/alessandromr/pharmacy/internal/rpcserver"
-	"github.com/alessandromr/pharmacy/script"
 )
 
 func main() {
 	pharmaciesDL := memory.PharmaciesMemory{}
 
-	go script.SyncData(&pharmaciesDL)
+	go internal.SyncData(&pharmaciesDL)
 	time.Sleep(time.Second * 2)
 
 	r := rpcserver.NewJsonRpcServer()
