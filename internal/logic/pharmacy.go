@@ -38,8 +38,7 @@ func SearchNearestPharmacy(location model.Location, rangeMt int, limit int) ([]m
 	//Remove pharmacies out of range
 	for k, v := range pharmacyDistance {
 		if v.Distance > rangeMt {
-			pharmacyDistance = pharmacyDistance[:k]
-			break
+			pharmacyDistance = append(pharmacyDistance[:k], pharmacyDistance[k+1:]...)
 		}
 	}
 
