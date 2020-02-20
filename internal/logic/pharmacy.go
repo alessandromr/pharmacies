@@ -8,6 +8,7 @@ import (
 	"github.com/alessandromr/pharmacy/model"
 )
 
+//SearchNearestPharmacy return a list of nearest pharmacies
 func SearchNearestPharmacy(location model.Location, rangeMt int, limit int) ([]model.PharmacyDistance, error) {
 	pharmaciesDL := memory.PharmaciesMemory{}
 
@@ -34,11 +35,6 @@ func SearchNearestPharmacy(location model.Location, rangeMt int, limit int) ([]m
 		}
 	}
 
-	//Sort pharmacies by distance
-	sort.Slice(pharmacyDistance[:], func(i, j int) bool {
-		return pharmacyDistance[i].Distance < pharmacyDistance[j].Distance
-	})
-
 	//Remove pharmacies out of range
 	for k, v := range pharmacyDistance {
 		if v.Distance > rangeMt {
@@ -46,6 +42,11 @@ func SearchNearestPharmacy(location model.Location, rangeMt int, limit int) ([]m
 			break
 		}
 	}
+
+	//Sort pharmacies by distance
+	sort.Slice(pharmacyDistance[:], func(i, j int) bool {
+		return pharmacyDistance[i].Distance < pharmacyDistance[j].Distance
+	})
 
 	if limit >= len(pharmacyDistance) {
 		return pharmacyDistance, nil
