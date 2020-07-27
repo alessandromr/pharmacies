@@ -35,20 +35,21 @@ func SearchNearestPharmacy(location model.Location, rangeMt int, limit int) ([]m
 		}
 	}
 
-	//Remove pharmacies out of range
-	for k, v := range pharmacyDistance {
-		if v.Distance > rangeMt {
-			pharmacyDistance = append(pharmacyDistance[:k], pharmacyDistance[k+1:]...)
+	var pharmaciesInRange []model.PharmacyDistance
+	//Get pharmacies in range
+	for _, v := range pharmacyDistance {
+		if v.Distance < rangeMt {
+			pharmaciesInRange = append(pharmaciesInRange, v)
 		}
 	}
 
 	//Sort pharmacies by distance
-	sort.Slice(pharmacyDistance[:], func(i, j int) bool {
-		return pharmacyDistance[i].Distance < pharmacyDistance[j].Distance
+	sort.Slice(pharmaciesInRange[:], func(i, j int) bool {
+		return pharmaciesInRange[i].Distance < pharmaciesInRange[j].Distance
 	})
 
-	if limit >= len(pharmacyDistance) {
-		return pharmacyDistance, nil
+	if limit >= len(pharmaciesInRange) {
+		return pharmaciesInRange, nil
 	}
-	return pharmacyDistance[:limit], nil
+	return pharmaciesInRange[:limit], nil
 }
